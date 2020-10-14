@@ -26,13 +26,12 @@ let transporter = nodemailer.createTransport(mailGunTrans(auth));
 //   },
 // });
 
-router.get("/api/contact-me", (req, res, next) => {
-  res.send("Hello");
-});
+// router.get("/api/contact-me", (req, res, next) => {
+//   res.send("Hello");
+// });
 
 router.post("/api/contact-me", (req, res, next) => {
   const { subject, email, message } = req.body;
-  // console.log("Checking", req.body);
   const dataMessage = req.body;
 
   if (!subject || !email || !message) {
@@ -58,7 +57,6 @@ router.post("/api/contact-me", (req, res, next) => {
   };
 
   return transporter.sendMail(mailOptions, (error, data) => {
-    // console.log("SENDING EMAIL TEST");
     error ? res.json("Error occurs") : res.json("Message sent");
   });
 });

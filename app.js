@@ -7,13 +7,14 @@ const cors = require("cors");
 
 const app = express();
 
+// require database configuration
+require("./configs/db.configs");
+
 app.use(
   cors({
-    // origin: [process.env.FRONTEND_POINT],
-    //this point is react is going to run and goes in env file too
     origin: true,
-    credentials: true, //this need to setup on the frontend as well
-    //in axios withCredentials: true
+    credentials: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   })
 );
 
@@ -24,6 +25,5 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", require("./routes/message-route/message"));
-app.use("/", require("./routes/testAPI"));
 
 module.exports = app;
